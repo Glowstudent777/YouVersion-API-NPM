@@ -81,10 +81,11 @@ async function getVerse(book, chapter, verses, version = "NIV") {
 }
 
 //Testing :)
-
 // (async () => {
+//     const votd = await getVerseOfTheDay();
 //     const verses = await getVerse("Genesis", "1", "30", "NIV");
 //     console.log(verses);
+//     console.log(votd);
 // })();
 
 module.exports = { getVerseOfTheDay, getVerse }
