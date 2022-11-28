@@ -12,32 +12,64 @@ npm install @glowstudent/youversion
 
 ## Usage
 
-#### JavaScript
-
+#### Import the library
 ```javascript
-
 const YouVersion = require("@glowstudent/youversion");
-
-// Verse of the day
-await YouVersion.getVerseOfTheDay();
-
-// Fetching verses
-await YouVersion.getVerse("Genesis", "1", "1", "KJV");
 ```
 
-#### Examples
+#### Getting the verse of the day: 
+```javascript
+// Version is not yet configurable
+console.log(await YouVersion.getVerseOfTheDay());
+```
+```json
+{
+  "verse": "Now faith is confidence in what we hope for and assurance about what we do not see.",
+  "passage": "Hebrews 11:1 (NIV)"
+}
+```
+
+#### Getting any verse: 
+```javascript
+// Version is optional, default version is NLT
+// YouVersion.getVerse("Book", "Chapter", "Verses", "Version");
+
+console.log(await YouVersion.getVerse("John", "3", "16", "KJV"));
+```
+```json
+{
+  "book": "John",
+  "alias": "JHN",
+  "chapter": "3",
+  "verses": "16",
+  "version": "KJV",
+  "passage": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."
+}
+```
+
+## Examples
+
+Getting any verse: 
 ```javascript
 
 const YouVersion = require("@glowstudent/youversion");
 
-// getVerse("Book", "Chapter", "Verses", "Version");
-// Version is optional, default version is NLT
-
 // Get Genesis 1:1-3 NLT
-console.log(await YouVersion.getVerse("Genesis", "1", "1-3"));
+console.log(await YouVersion.getVerse("Genesis", "1", "1-3").passage);
 
 // Get John 3:16 KJV
-console.log(await YouVersion.getVerse("John", "3", "16", "KJV"));
+console.log(await YouVersion.getVerse("John", "3", "16", "KJV").passage);
+
+```
+
+Getting the Verse of the Day: 
+```javascript
+
+// Now faith is the substance of things hoped for, the evidence of things not seen.
+console.log(await YouVersion.getVerseOfTheDay().verse);
+
+// Hebrews 11:1 (KJV)
+console.log(await YouVersion.getVerseOfTheDay().passage);
 
 ```
 
