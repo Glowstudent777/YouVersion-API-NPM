@@ -109,6 +109,3 @@ script.js
 # old packages
 old_package.json
 old_node_modules
-
-# Deprecated :)
-deprecated/
