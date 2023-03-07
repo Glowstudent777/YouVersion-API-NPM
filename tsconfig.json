@@ -1,14 +1,22 @@
 {
-    "include": ["src/*"],
-    "compilerOptions": {
-      "allowJs": true,
-      "declaration": true,
-      "emitDeclarationOnly": true,
-      "outDir": "dist",
-      "declarationMap": true,
-      "skipLibCheck": true
-    },
-    "exclude": [
-        "node_modules"
-      ],
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "strict": true,
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+	"resolveJsonModule": true
+  },
+  "include":[ 
+    "src/**/*",
+    "src/**/*.json",
+  ],
+  "watchOptions": {
+    "watchFile": "useFsEvents",
+    "watchDirectory": "useFsEvents",
+    "fallbackPolling": "dynamicPriority",
+    "synchronousWatchDirectory": true
   }
+}
