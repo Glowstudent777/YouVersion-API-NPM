@@ -66,7 +66,3 @@ export async function getVerse( book: string, chapter: string, verses: string, v
         console.error(err);
     }
 }
-
-(async () => {
-    console.log(await getVerse("GEN", "1", "1", "SCH2000"));
-})();
