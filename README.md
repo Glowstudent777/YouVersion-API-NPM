@@ -16,11 +16,12 @@ pnpm install @glowstudent/youversion
 ## Usage
 
 #### Import the library
+
 ```javascript
 const YouVersion = require("@glowstudent/youversion");
 ```
 
-#### Getting the verse of the day: 
+#### Getting the verse of the day:
 
 > **Note**
 > Version is not yet configurable
@@ -31,8 +32,8 @@ const YouVersion = require("@glowstudent/youversion");
 (async () => {
   console.log(await YouVersion.getVerseOfTheDay());
 })();
-
 ```
+
 ```json
 {
   "citation": "Hebrews 11:1 (NIV)",
@@ -40,7 +41,8 @@ const YouVersion = require("@glowstudent/youversion");
 }
 ```
 
-#### Getting any verse: 
+#### Getting any verse:
+
 ```javascript
 const YouVersion = require("@glowstudent/youversion");
 
@@ -48,6 +50,7 @@ const YouVersion = require("@glowstudent/youversion");
   console.log(await YouVersion.getVerse("John", "3", "16", "KJV"));
 })();
 ```
+
 ```json
 {
   "citation": "John 3:16 KJV",
@@ -181,16 +184,19 @@ Trying to access a book that does not exist will prompt a similar response but w
 | NIV      | 111  |
 | NLT      | 116  |
 | NR06     | 122  |
+| SCH2000  | 157  |
 | VULG     | 823  |
 
 </details>
 
 ## Links
+
 - [GitHub](https://github.com/Glowstudent777/YouVersion-API)
 - [npm](https://www.npmjs.com/package/@glowstudent/youversion)
 - [Discord](https://discord.gg/4wM63P7ZUd)
 
 ## Contributing
+
 Before creating an issue, please ensure that it hasn't already been reported/suggested.
 
 ## License

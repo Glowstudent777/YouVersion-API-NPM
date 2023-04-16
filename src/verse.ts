@@ -32,7 +32,6 @@ export async function getVerse( book: string, chapter: string, verses: string, v
     if (!bookFinder) return apiError(400, `Could not find book '${book}' by name or alias.`)
 
     let URL = `${baseURL}/${versionFinder.id}/${bookFinder.aliases[0]}.${chapter}.${verses}`;
-    const citation = `${bookFinder.book} ${chapter}:${verses} ${versionFinder.version}`
 
     try {
         const { data } = await axios.get(URL);
@@ -43,7 +42,9 @@ export async function getVerse( book: string, chapter: string, verses: string, v
         if (chapter > bookFinder.chapters) return apiError(400, "Chapter not found.");
 
         const versesArray: Array<String> = [];
+        const citationsArray: Array<String> = [];
         const wrapper = $(".text-19");
+        const citationWrapper = $(".text-16");
 
         await wrapper.each((i, p) => {
             let unformattedVerse = $(p).eq(0).text();
@@ -51,11 +52,21 @@ export async function getVerse( book: string, chapter: string, verses: string, v
             versesArray.push(formattedVerse)
         })
 
+        await citationWrapper.each((i, p) => {
+            let citation = $(p).eq(0).text();
+
+            citationsArray.push(citation)
+        })
+
         return {
-            citation: citation,
+            citation: citationsArray[0],
             passage: versesArray[0]
         }
     } catch (err) {
         console.error(err);
     }
 }
+
+(async () => {
+    console.log(await getVerse("GEN", "1", "1", "SCH2000"));
+})();
