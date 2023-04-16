@@ -5,3 +5,12 @@ old_node_modules
 
 # src
 src
+deprecated
+
+# Config Stuff
+tsconfig.json
+tslint.json
+.prettierrc
+
+# Builds
+*tzg

@@ -3,11 +3,14 @@
 A simple module to get the Verse of the Day and any verse you would like.
 
 ## Installation
-Install via NPM:
+
+> **Note**
+> I use `pnpm` in these examples. `NPM` will also work if you don't have or want to install `pnpm`
+
+First step is of course installing the module
 
 ```bash
-npm install @glowstudent/youversion
-
+pnpm install @glowstudent/youversion
 ```
 
 ## Usage
@@ -18,60 +21,169 @@ const YouVersion = require("@glowstudent/youversion");
 ```
 
 #### Getting the verse of the day: 
+
+> **Note**
+> Version is not yet configurable
+
 ```javascript
-// Version is not yet configurable
-console.log(await YouVersion.getVerseOfTheDay());
+const YouVersion = require("@glowstudent/youversion");
+
+(async () => {
+  console.log(await YouVersion.getVerseOfTheDay());
+})();
+
 ```
 ```json
 {
-  "verse": "Now faith is confidence in what we hope for and assurance about what we do not see.",
-  "passage": "Hebrews 11:1 (NIV)"
+  "citation": "Hebrews 11:1 (NIV)",
+  "passage": "Now faith is confidence in what we hope for and assurance about what we do not see."
 }
 ```
 
 #### Getting any verse: 
 ```javascript
-// Version is optional, default version is NLT
-// YouVersion.getVerse("Book", "Chapter", "Verses", "Version");
+const YouVersion = require("@glowstudent/youversion");
 
-console.log(await YouVersion.getVerse("John", "3", "16", "KJV"));
+(async () => {
+  console.log(await YouVersion.getVerse("John", "3", "16", "KJV"));
+})();
 ```
 ```json
 {
-  "book": "John",
-  "alias": "JHN",
-  "chapter": "3",
-  "verses": "16",
-  "version": "KJV",
+  "citation": "John 3:16 KJV",
   "passage": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."
 }
 ```
 
-## Examples
+---
 
-Getting any verse: 
-```javascript
+## Responses
 
-const YouVersion = require("@glowstudent/youversion");
+Requests return a JSON object and a status code.
 
-// Get Genesis 1:1-3 NLT
-console.log(await YouVersion.getVerse("Genesis", "1", "1-3").passage);
+### Good Respsonses
 
-// Get John 3:16 KJV
-console.log(await YouVersion.getVerse("John", "3", "16", "KJV").passage);
+Good responses will return a JSON with a `citation` and a `passage`.
 
+```json
+{
+  "citation": "John 3:16 NLT",
+  "passage": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."
+}
 ```
 
-Getting the Verse of the Day: 
-```javascript
+### Bad Responses
 
-// Now faith is the substance of things hoped for, the evidence of things not seen.
-console.log(await YouVersion.getVerseOfTheDay().verse);
+If `book` is not specified or cannot be read it will return an error.
 
-// Hebrews 11:1 (KJV)
-console.log(await YouVersion.getVerseOfTheDay().passage);
-
+```json
+{
+  "code": 400,
+  "message": "Missing field 'book'"
+}
 ```
+
+<br>
+
+Trying to access a book that does not exist will prompt a similar response but with a different error message
+
+```json
+{
+  "code": 400,
+  "message": "Could not find book 'Coffee' by name or alias."
+}
+```
+
+# Books and Aliases
+
+<details>
+<summary>Books and Aliases</summary>
+
+| Book              | Alias |
+| ----------------- | ----- |
+| Genesis           | GEN   |
+| Exodus            | EXO   |
+| Leviticus         | LEV   |
+| Numbers           | NUM   |
+| Deuteronomy       | DEU   |
+| Joshua            | JOS   |
+| Judges            | JDG   |
+| Ruth              | RUT   |
+| 1st Samuel        | 1SA   |
+| 2nd Samuel        | 2SA   |
+| 1st Kings         | 1KI   |
+| 2nd Kings         | 2KI   |
+| 1st Chronicles    | 1CH   |
+| 2nd Chronicles    | 2CH   |
+| Ezra              | EZR   |
+| Nehemiah          | NEH   |
+| Esther            | EST   |
+| Job               | JOB   |
+| Psalms            | PSA   |
+| Proverbs          | PRO   |
+| Ecclesiastes      | ECC   |
+| Song of Songs     | SNG   |
+| Isaiah            | ISA   |
+| Jeremiah          | JER   |
+| Lamentations      | LAM   |
+| Ezekiel           | EZK   |
+| Daniel            | DAN   |
+| Hosea             | HOS   |
+| Joel              | JOL   |
+| Amos              | AMO   |
+| Obadiah           | OBA   |
+| Jonah             | JON   |
+| Micah             | MIC   |
+| Nahum             | NAM   |
+| Habakkuk          | HAB   |
+| Zephaniah         | ZEP   |
+| Haggai            | HAG   |
+| Zechariah         | ZEC   |
+| Malachi           | MAL   |
+| Matthew           | MAT   |
+| Mark              | MRK   |
+| Luke              | LUK   |
+| John              | JHN   |
+| Acts              | ACT   |
+| Romans            | ROM   |
+| 1st Corinthians   | 1CO   |
+| 2nd Corinthians   | 2CO   |
+| Galatians         | GAL   |
+| Ephesians         | EPH   |
+| Philippians       | PHP   |
+| Colossians        | COL   |
+| 1st Thessalonians | 1TH   |
+| 2nd Thessalonians | 2TH   |
+| 1st Timothy       | 1TI   |
+| 2nd Timothy       | 2TI   |
+| Titus             | TIT   |
+| Philemon          | PHM   |
+| Hebrews           | HEB   |
+| James             | JAS   |
+| 1st Peter         | 1PE   |
+| 2nd Peter         | 2PE   |
+| 1st John          | 1JN   |
+| 2nd John          | 2JN   |
+| 3rd John          | 3JN   |
+| Jude              | JUD   |
+| Revelation        | REV   |
+
+</details>
+
+<details>
+<summary>Versions</summary>
+
+| Versions | ID   |
+| -------- | ---- |
+| AMP      | 1588 |
+| ICL00D   | 1196 |
+| KJV      | 1    |
+| NIV      | 111  |
+| NLT      | 116  |
+| NR06     | 122  |
+| VULG     | 823  |
+
+</details>
 
 ## Links
 - [GitHub](https://github.com/Glowstudent777/YouVersion-API)
