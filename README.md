@@ -173,6 +173,8 @@ Trying to access a book that does not exist will prompt a similar response but w
 
 </details>
 
+# Versions
+
 <details>
 <summary>Versions</summary>
 
@@ -186,7 +188,14 @@ Trying to access a book that does not exist will prompt a similar response but w
 | NR06     | 122  |
 | SCH2000  | 157  |
 | VULG     | 823  |
-
+| THSV11   | 174  |
+| TNCV     | 179  |
+| THAERV   | 203  |
+| NODTHNT  | 1907 |
+| NTV      | 2744 |
+| ESV      | 59   |
+| SBLG     | 156  |
+| CCB      | 36   |
 </details>
 
 ## Links
