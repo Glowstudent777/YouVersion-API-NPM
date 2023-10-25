@@ -44,7 +44,7 @@ export async function getVerse( book: string, chapter: string, verses: string, v
         const versesArray: Array<String> = [];
         const citationsArray: Array<String> = [];
         const wrapper = $(".text-19");
-        const citationWrapper = $(".text-16");
+        const citationWrapper = $(".text-text-light");
 
         await wrapper.each((i, p) => {
             let unformattedVerse = $(p).eq(0).text();
