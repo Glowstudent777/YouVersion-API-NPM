@@ -5,12 +5,12 @@ A simple module to get the Verse of the Day and any verse you would like.
 ## Installation
 
 > **Note**
-> I use `pnpm` in these examples. `NPM` will also work if you don't have or want to install `pnpm`
+> I use `bun` in these examples. `NPM` will also work if you don't have or want to install `pnpm`
 
 First step is of course installing the module
 
 ```bash
-pnpm install @glowstudent/youversion
+bun install @glowstudent/youversion
 ```
 
 ## Usage
@@ -177,6 +177,7 @@ Trying to access a book that does not exist will prompt a similar response but w
 
 <details>
 <summary>Versions</summary>
+
 | Versions | ID   |
 | -------- | ---- |
 | AMP      | 1588 |
@@ -200,6 +201,7 @@ Trying to access a book that does not exist will prompt a similar response but w
 | THSV11   | 174  |
 | TNCV     | 179  |
 | VULG     | 823  |
+
 </details>
 
 
