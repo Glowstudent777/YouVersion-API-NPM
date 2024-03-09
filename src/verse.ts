@@ -26,7 +26,7 @@ export async function getVerse(book: string, chapter: string, verses: string, ve
         const { data } = await axios.get(URL);
         const $ = cheerio.load(data);
 
-        if ($(".ChapterContent_reader__UZc2K").eq(-1).text() || chapter > bookFinder.chapters) return { code: 400, message: "Verse or Chapter not found." };
+        if (!$(".ChapterContent_reader__UZc2K").eq(-1).text().trim() || chapter > bookFinder.chapters) return { code: 400, message: "Verse or Chapter not found." };
 
         const versesArray = $(".text-19").map((_, p) => $(p).text().replace(/\n/g, ' ')).get();
         const citationsArray = $(".text-text-light").map((_, p) => $(p).text()).get();

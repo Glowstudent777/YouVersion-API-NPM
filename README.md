@@ -177,26 +177,31 @@ Trying to access a book that does not exist will prompt a similar response but w
 
 <details>
 <summary>Versions</summary>
-
 | Versions | ID   |
 | -------- | ---- |
 | AMP      | 1588 |
+| AMPC     | 8    |
+| ASV      | 12   |
+| CCB      | 36   |
+| ERV      | 406  |
+| ESV      | 59   |
+| GNV      | 2163 |
 | ICL00D   | 1196 |
 | KJV      | 1    |
+| MSG      | 97   |
 | NIV      | 111  |
 | NLT      | 116  |
+| NODTHNT  | 1907 |
 | NR06     | 122  |
+| NTV      | 2744 |
+| SBLG     | 156  |
 | SCH2000  | 157  |
-| VULG     | 823  |
+| THAERV   | 203  |
 | THSV11   | 174  |
 | TNCV     | 179  |
-| THAERV   | 203  |
-| NODTHNT  | 1907 |
-| NTV      | 2744 |
-| ESV      | 59   |
-| SBLG     | 156  |
-| CCB      | 36   |
+| VULG     | 823  |
 </details>
+
 
 ## Links
 
