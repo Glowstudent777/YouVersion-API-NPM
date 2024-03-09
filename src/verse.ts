@@ -1,67 +1,37 @@
-import axios from 'axios'
+import axios from 'axios';
 import * as cheerio from 'cheerio';
 
-interface bookType {
-    book: String;
-    aliases: Array<String>;
-    chapters: Number;
+interface BookType {
+    book: string;
+    aliases: string[];
+    chapters: number;
 }
 
-export async function getVerse( book: string, chapter: string, verses: string, version: string = "NIV") {
-
+export async function getVerse(book: string, chapter: string, verses: string, version = "NIV") {
     const versions = require('./versions.json');
     const bookList = require('./books.json');
     const baseURL = "https://www.bible.com/bible";
 
-    function apiError(code: number, message: string) {
-        return {
-            "code": code,
-            "message": message
-        };
-    }
+    if (!book) return { code: 400, message: "Missing field 'book'" };
 
-    if (!book) return apiError(400, "Missing field 'book'");
+    const versionKey = Object.keys(versions).find(key => key.toLocaleUpperCase() === version.toLocaleUpperCase()) || "NIV";
+    const versionFinder = { version: versionKey, id: versions[versionKey] };
 
-    let versionFinder: any = {
-        version: Object.keys(versions)[Object.keys(versions).indexOf(version.toLocaleString().toLocaleUpperCase())] ??= "NIV",
-        id: versions[version.toString().toLocaleUpperCase()] ??= 1,
-    }
+    const bookFinder = bookList.books.find((o: BookType) => o.book.toLowerCase() === book.toLowerCase() || o.aliases.includes(book.toUpperCase()));
+    if (!bookFinder) return { code: 400, message: `Could not find book '${book}' by name or alias.` };
 
-    let bookFinder = bookList.books.find((o: bookType) => o.book.toLowerCase() === book.toLowerCase()) || bookList.books.find((o: bookType) => o.aliases.includes(book.toUpperCase()));
-
-    if (!bookFinder) return apiError(400, `Could not find book '${book}' by name or alias.`)
-
-    let URL = `${baseURL}/${versionFinder.id}/${bookFinder.aliases[0]}.${chapter}.${verses}`;
+    const URL = `${baseURL}/${versionFinder.id}/${bookFinder.aliases[0]}.${chapter}.${verses}`;
 
     try {
         const { data } = await axios.get(URL);
         const $ = cheerio.load(data);
 
-        const lastVerse = $(".ChapterContent_reader__UZc2K").eq(-1).text();
-        if (lastVerse) return apiError(400, "Verse not found");
-        if (chapter > bookFinder.chapters) return apiError(400, "Chapter not found.");
+        if ($(".ChapterContent_reader__UZc2K").eq(-1).text() || chapter > bookFinder.chapters) return { code: 400, message: "Verse or Chapter not found." };
 
-        const versesArray: Array<String> = [];
-        const citationsArray: Array<String> = [];
-        const wrapper = $(".text-19");
-        const citationWrapper = $(".text-text-light");
+        const versesArray = $(".text-19").map((_, p) => $(p).text().replace(/\n/g, ' ')).get();
+        const citationsArray = $(".text-text-light").map((_, p) => $(p).text()).get();
 
-        await wrapper.each((i, p) => {
-            let unformattedVerse = $(p).eq(0).text();
-            let formattedVerse = unformattedVerse.replace(/\n/g, ' ');
-            versesArray.push(formattedVerse)
-        })
-
-        await citationWrapper.each((i, p) => {
-            let citation = $(p).eq(0).text();
-
-            citationsArray.push(citation)
-        })
-
-        return {
-            citation: citationsArray[0],
-            passage: versesArray[0]
-        }
+        return { citation: citationsArray[0], passage: versesArray[0] };
     } catch (err) {
         console.error(err);
     }
