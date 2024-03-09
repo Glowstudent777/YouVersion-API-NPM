@@ -1,5 +1,7 @@
 import axios from 'axios';
-import * as cheerio from 'cheerio';
+import cheerio from 'cheerio';
+import versions from './versions.json';
+import bookList from './books.json';
 
 interface BookType {
     book: string;
@@ -8,31 +10,31 @@ interface BookType {
 }
 
 export async function getVerse(book: string, chapter: string, verses: string, version = "NIV") {
-    const versions = require('./versions.json');
-    const bookList = require('./books.json');
     const baseURL = "https://www.bible.com/bible";
 
     if (!book) return { code: 400, message: "Missing field 'book'" };
 
-    const versionKey = Object.keys(versions).find(key => key.toLocaleUpperCase() === version.toLocaleUpperCase()) || "NIV";
-    const versionFinder = { version: versionKey, id: versions[versionKey] };
+    const versionKey = Object.keys(versions).find(key => key.toUpperCase() === version.toUpperCase()) || "NIV";
+    const versionId = versions[versionKey];
 
-    const bookFinder = bookList.books.find((o: BookType) => o.book.toLowerCase() === book.toLowerCase() || o.aliases.includes(book.toUpperCase()));
-    if (!bookFinder) return { code: 400, message: `Could not find book '${book}' by name or alias.` };
+    const bookData = bookList.books.find((o: BookType) => o.book.toLowerCase() === book.toLowerCase() || o.aliases.includes(book.toUpperCase()));
+    if (!bookData) return { code: 400, message: `Could not find book '${book}' by name or alias.` };
+    if (parseInt(chapter) > bookData.chapters || parseInt(chapter) < 1) return { code: 400, message: `Invalid chapter '${chapter}' for book '${book}'.` };
 
-    const URL = `${baseURL}/${versionFinder.id}/${bookFinder.aliases[0]}.${chapter}.${verses}`;
+    const URL = `${baseURL}/${versionId}/${bookData.aliases[0]}.${chapter}.${verses}`;
 
     try {
         const { data } = await axios.get(URL);
         const $ = cheerio.load(data);
 
-        if (!$(".ChapterContent_reader__UZc2K").eq(-1).text().trim() || chapter > bookFinder.chapters) return { code: 400, message: "Verse or Chapter not found." };
-
         const versesArray = $(".text-19").map((_, p) => $(p).text().replace(/\n/g, ' ')).get();
         const citationsArray = $(".text-text-light").map((_, p) => $(p).text()).get();
+
+        if (!versesArray.length || !citationsArray.length) return { code: 400, message: `Could not find verse '${verses}' in chapter '${chapter}' of book '${book}'.` };
 
         return { citation: citationsArray[0], passage: versesArray[0] };
     } catch (err) {
         console.error(err);
+        return { code: 500, message: "An error occurred while fetching the verse." };
     }
 }
