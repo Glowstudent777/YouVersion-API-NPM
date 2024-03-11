@@ -7,8 +7,15 @@ export async function getVerse(book: string, passage: string, version: string = 
     const $ = cheerio.load(response.data);
 
     // Get the content within the meta tag with property og:description
-    const verses = { 'passage': $('meta[property="og:description"]').attr('content') }
+    const passageContent = $('meta[property="og:description"]').attr('content');
 
-    // Return the scraped text
-    return verses;
+    if (!passageContent) {
+        return {
+            "code": 400,
+            "message": `Could not find passage ${book} ${passage} ${version}`
+        };
+    }
+
+    return { 'citation': `${book} ${passage} ${version}`, 'passage': passageContent }
+
 }
