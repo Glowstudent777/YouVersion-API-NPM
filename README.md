@@ -27,7 +27,7 @@ import { getVerse } from 'placeholder';
 ```javascript
 import { getVerse } from 'placeholder';;
 
-  console.log(await YouVersion.getVerseOfTheDay());
+  console.log(await getVerseOfTheDay());
 ```
 
 ```json
@@ -42,12 +42,13 @@ import { getVerse } from 'placeholder';;
 ```javascript
 import { getVerse } from 'placeholder';
 
-console.log(await getVerse('John', '3:16', 'NKJV'))
+console.log(await getVerse('Luke', '9:55', 'NLT'))
 ```
 ```json
 {
-  "citation": "John 3:16 NKJV",
-  "passage": "For God so loved the world, that he gave his only begotten Son, that whosoever believes in him should not perish, but have everlasting life."
+  "citation": "Luke 9:55 NLT",
+  "passage": "But Jesus turned and rebuked them.",
+  "footnotes": "9:55 Some manuscripts add an expanded conclusion to verse 55 and an additional sentence in verse 56: And he said, “You don’t realize what your hearts are like. 56 For the Son of Man has not come to destroy people’s lives, but to save them.”",
 }
 ```
 
@@ -56,7 +57,6 @@ or alternatively..
 ```js
 import { getVerse } from 'placeholder';
 
-// Now you can use the getVerse function in your code
 getVerse('Psalms', '22:9-10', 'NIV').then(result => console.log(result));
 ```
 
@@ -80,7 +80,7 @@ Good responses will return a JSON with a `citation` and a `passage`.
 ```json
 {
   "citation": "John 3:16 NLT",
-  "passage": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."
+  "passage": "For this is how God loved the world: He gave his one and only Son, so that everyone who believes in him will not perish but have eternal life"
 }
 ```
 
