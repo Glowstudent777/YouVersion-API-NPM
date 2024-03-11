@@ -1,37 +1,33 @@
-# YouVersion-API
+# BibleAPI
 
-A simple module to get the Verse of the Day and any verse you would like.
+An API which scrapes bible websites to get daily verse, and verses.
 
 ## Installation
 
 > **Note**
-> I use `pnpm` in these examples. `NPM` will also work if you don't have or want to install `pnpm`
+> I use `bun` in these examples. `npm` will also work if you don't have or want to install `bun`
 
 First step is of course installing the module
 
 ```bash
-pnpm install @glowstudent/youversion
+bun install @cvyx/bible
 ```
 
 ## Usage
 
 #### Import the library
 
-```javascript
-const YouVersion = require("@glowstudent/youversion");
+```js
+import { getVerse } from 'placeholder';
 ```
 
 #### Getting the verse of the day:
 
-> **Note**
-> Version is not yet configurable
 
 ```javascript
-const YouVersion = require("@glowstudent/youversion");
+import { getVerse } from 'placeholder';;
 
-(async () => {
-  console.log(await YouVersion.getVerseOfTheDay());
-})();
+  console.log(await getVerseOfTheDay());
 ```
 
 ```json
@@ -44,17 +40,30 @@ const YouVersion = require("@glowstudent/youversion");
 #### Getting any verse:
 
 ```javascript
-const YouVersion = require("@glowstudent/youversion");
+import { getVerse } from 'placeholder';
 
-(async () => {
-  console.log(await YouVersion.getVerse("John", "3", "16", "KJV"));
-})();
+console.log(await getVerse('Luke', '9:55', 'NLT'))
+```
+```json
+{
+  "citation": "Luke 9:55 NLT",
+  "passage": "But Jesus turned and rebuked them.",
+  "footnotes": "9:55 Some manuscripts add an expanded conclusion to verse 55 and an additional sentence in verse 56: And he said, “You don’t realize what your hearts are like. 56 For the Son of Man has not come to destroy people’s lives, but to save them.”",
+}
+```
+
+or alternatively..
+
+```js
+import { getVerse } from 'placeholder';
+
+getVerse('Psalms', '22:9-10', 'NIV').then(result => console.log(result));
 ```
 
 ```json
 {
-  "citation": "John 3:16 KJV",
-  "passage": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."
+  "citation": "Psalms 22:9-10 NIV",
+  "passage": "Yet you brought me out of the womb; you made me trust in you, even at my mother’s breast. From birth I was cast on you; from my mother’s womb you have been my God.",
 }
 ```
 
@@ -71,136 +80,30 @@ Good responses will return a JSON with a `citation` and a `passage`.
 ```json
 {
   "citation": "John 3:16 NLT",
-  "passage": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."
+  "passage": "For this is how God loved the world: He gave his one and only Son, so that everyone who believes in him will not perish but have eternal life"
 }
 ```
 
 ### Bad Responses
 
-If `book` is not specified or cannot be read it will return an error.
+Trying to access a passage that does not exist will prompt an error message
 
 ```json
 {
   "code": 400,
-  "message": "Missing field 'book'"
+  "message": "Could not find passage Script 9:99 NLT",
 }
+
 ```
 
-<br>
-
-Trying to access a book that does not exist will prompt a similar response but with a different error message
-
-```json
-{
-  "code": 400,
-  "message": "Could not find book 'Coffee' by name or alias."
-}
-```
-
-# Books and Aliases
-
-<details>
-<summary>Books and Aliases</summary>
-
-| Book              | Alias |
-| ----------------- | ----- |
-| Genesis           | GEN   |
-| Exodus            | EXO   |
-| Leviticus         | LEV   |
-| Numbers           | NUM   |
-| Deuteronomy       | DEU   |
-| Joshua            | JOS   |
-| Judges            | JDG   |
-| Ruth              | RUT   |
-| 1st Samuel        | 1SA   |
-| 2nd Samuel        | 2SA   |
-| 1st Kings         | 1KI   |
-| 2nd Kings         | 2KI   |
-| 1st Chronicles    | 1CH   |
-| 2nd Chronicles    | 2CH   |
-| Ezra              | EZR   |
-| Nehemiah          | NEH   |
-| Esther            | EST   |
-| Job               | JOB   |
-| Psalms            | PSA   |
-| Proverbs          | PRO   |
-| Ecclesiastes      | ECC   |
-| Song of Songs     | SNG   |
-| Isaiah            | ISA   |
-| Jeremiah          | JER   |
-| Lamentations      | LAM   |
-| Ezekiel           | EZK   |
-| Daniel            | DAN   |
-| Hosea             | HOS   |
-| Joel              | JOL   |
-| Amos              | AMO   |
-| Obadiah           | OBA   |
-| Jonah             | JON   |
-| Micah             | MIC   |
-| Nahum             | NAM   |
-| Habakkuk          | HAB   |
-| Zephaniah         | ZEP   |
-| Haggai            | HAG   |
-| Zechariah         | ZEC   |
-| Malachi           | MAL   |
-| Matthew           | MAT   |
-| Mark              | MRK   |
-| Luke              | LUK   |
-| John              | JHN   |
-| Acts              | ACT   |
-| Romans            | ROM   |
-| 1st Corinthians   | 1CO   |
-| 2nd Corinthians   | 2CO   |
-| Galatians         | GAL   |
-| Ephesians         | EPH   |
-| Philippians       | PHP   |
-| Colossians        | COL   |
-| 1st Thessalonians | 1TH   |
-| 2nd Thessalonians | 2TH   |
-| 1st Timothy       | 1TI   |
-| 2nd Timothy       | 2TI   |
-| Titus             | TIT   |
-| Philemon          | PHM   |
-| Hebrews           | HEB   |
-| James             | JAS   |
-| 1st Peter         | 1PE   |
-| 2nd Peter         | 2PE   |
-| 1st John          | 1JN   |
-| 2nd John          | 2JN   |
-| 3rd John          | 3JN   |
-| Jude              | JUD   |
-| Revelation        | REV   |
-
-</details>
 
 # Versions
 
-<details>
-<summary>Versions</summary>
-
-| Versions | ID   |
-| -------- | ---- |
-| AMP      | 1588 |
-| ICL00D   | 1196 |
-| KJV      | 1    |
-| NIV      | 111  |
-| NLT      | 116  |
-| NR06     | 122  |
-| SCH2000  | 157  |
-| VULG     | 823  |
-| THSV11   | 174  |
-| TNCV     | 179  |
-| THAERV   | 203  |
-| NODTHNT  | 1907 |
-| NTV      | 2744 |
-| ESV      | 59   |
-| SBLG     | 156  |
-| CCB      | 36   |
-</details>
+Checkout https://www.biblegateway.com/versions/
 
 ## Links
 
-- [GitHub](https://github.com/Glowstudent777/YouVersion-API)
+- [GitHub](https://github.com/cvyx/YouVersionAPI)
 - [npm](https://www.npmjs.com/package/@glowstudent/youversion)
 - [Discord](https://discord.gg/4wM63P7ZUd)
 
