@@ -5,7 +5,7 @@ A simple module to get the Verse of the Day and any verse you would like.
 ## Installation
 
 > **Note**
-> I use `bun` in these examples. `NPM` will also work if you don't have or want to install `pnpm`
+> I use `bun` in these examples. `npm` will also work if you don't have or want to install `bun`
 
 First step is of course installing the module
 
@@ -50,11 +50,26 @@ const YouVersion = require("@glowstudent/youversion");
   console.log(await YouVersion.getVerse("John", "3", "16", "KJV"));
 })();
 ```
-
 ```json
 {
   "citation": "John 3:16 KJV",
   "passage": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."
+}
+```
+
+or alternatively..
+
+```js
+import { getVerse } from 'placeholder';
+
+// Now you can use the getVerse function in your code
+getVerse('Psalms', '22:9-10').then(result => console.log(result));
+```
+
+```json
+{
+  "citation": "Psalms 22:9-10",
+  "passage": "Yet You are He who pulled me out of the womb; You made me trust when on my mother’s breasts. I was cast upon You from birth; From my mother’s womb You have been my God.",
 }
 ```
 
@@ -175,39 +190,11 @@ Trying to access a book that does not exist will prompt a similar response but w
 
 # Versions
 
-<details>
-<summary>Versions</summary>
-
-| Versions | ID   |
-| -------- | ---- |
-| AMP      | 1588 |
-| AMPC     | 8    |
-| ASV      | 12   |
-| CCB      | 36   |
-| ERV      | 406  |
-| ESV      | 59   |
-| GNV      | 2163 |
-| ICL00D   | 1196 |
-| KJV      | 1    |
-| MSG      | 97   |
-| NIV      | 111  |
-| NLT      | 116  |
-| NODTHNT  | 1907 |
-| NR06     | 122  |
-| NTV      | 2744 |
-| SBLG     | 156  |
-| SCH2000  | 157  |
-| THAERV   | 203  |
-| THSV11   | 174  |
-| TNCV     | 179  |
-| VULG     | 823  |
-
-</details>
-
+Checkout https://www.biblegateway.com/versions/
 
 ## Links
 
-- [GitHub](https://github.com/Glowstudent777/YouVersion-API)
+- [GitHub](https://github.com/cvyx/YouVersionAPI)
 - [npm](https://www.npmjs.com/package/@glowstudent/youversion)
 - [Discord](https://discord.gg/4wM63P7ZUd)
 

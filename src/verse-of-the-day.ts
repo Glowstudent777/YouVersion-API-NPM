@@ -1,16 +1,14 @@
 import axios from 'axios';
-import * as cheerio from 'cheerio';
+import cheerio from 'cheerio';
 
-export async function getVerseOfTheDay() {
-    try {
-        const { data } = await axios.get("https://www.bible.com/verse-of-the-day");
-        const $ = cheerio.load(data);
+export async function s() {
+    const url = 'https://www.biblegateway.com/passage/?search=Psalms%2022:9-10&version=NLT';
+    const response = await axios.get(url);
+    const $ = cheerio.load(response.data);
 
-        const versesArray = $("p.text-gray-50").map((_, p) => $(p).text().replace(/\n/g, ' ')).get();
-        const citationsArray = $(".mbs-2").map((_, p) => $(p).text()).get();
-
-        return { citation: citationsArray[1], passage: versesArray[0] };
-    } catch (err) {
-        console.error(err);
-    }
+    $('.line').each((i, el) => {
+       
+        const footnotes = $(el).text().replaceAll(/<\/?[a-zA-Z0-9=" ]*>/g, ' ').replace(/\s\s+/g, ' ').trim();
+        console.log(footnotes);
+    });
 }
