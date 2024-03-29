@@ -9,8 +9,11 @@ export async function getVerseOfTheDay() {
 
         const versesArray: Array<String> = [];
         const citationsArray: Array<String> = [];
-        const verses = $("p.text-gray-50");
-        const citations = $(".mbs-2");
+        const imageArray: Array<String> = [];
+
+        const verses = $("a.text-gray-50");
+        const citations = $("p.text-gray-25");
+        const images = $("a.block");
 
         await citations.each((i, p) => {
             let citation = $(p).eq(0).text();
@@ -23,9 +26,15 @@ export async function getVerseOfTheDay() {
             versesArray.push(formattedVerse)
         })
 
+        await images.each((i, p) => {
+            let image = `https://www.bible.com${$(p).find('img').attr()?.src}`
+            imageArray.push(image);
+        })
+
         return {
-            citation: citationsArray[1],
-            passage: versesArray[0]
+            citation: citationsArray[0],
+            passage: versesArray[0],
+            image: imageArray ?? []
         }
     } catch (err) {
         console.error(err);
