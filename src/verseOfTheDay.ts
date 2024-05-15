@@ -11,7 +11,7 @@ export async function getVerseOfTheDay() {
         const citationsArray: Array<String> = [];
         const imageArray: Array<String> = [];
 
-        const verses = $("a.text-gray-50");
+        const verses = $("a.text-text-light.w-full.no-underline");
         const citations = $("p.text-gray-25");
         const images = $("a.block");
 
