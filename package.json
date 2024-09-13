@@ -28,7 +28,8 @@
     "build": "npm run babel && npm run tsc && npm run pack",
     "babel": "babel src -d dist --copy-files",
     "tsc": "npx tsc",
-    "pack": "npm pack"
+    "pack": "npm pack",
+    "ci": "npm ci"
   },
   "repository": {
     "type": "git",
