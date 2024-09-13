@@ -16,7 +16,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-      - run: npm ci && npm run build
+      - run: pnpm install
+      - run: pnpm ci && pnpm run build
 
   publish-npm:
     needs: build
@@ -32,6 +33,7 @@ jobs:
           node-version: 20
           cache: 'pnpm'
           registry-url: https://registry.npmjs.org
+      - run: pnpm install
       - run: pnpm ci && pnpm run build
       - run: npm publish
         env:
