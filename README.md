@@ -24,7 +24,7 @@ const YouVersion = require("@glowstudent/youversion");
 #### Getting the verse of the day:
 
 > **Note**
-> Version is not yet configurable
+> The default language is English
 
 ```javascript
 const YouVersion = require("@glowstudent/youversion");
@@ -39,6 +39,30 @@ const YouVersion = require("@glowstudent/youversion");
   "citation": "Hebrews 11:1 (NIV)",
   "passage": "Now faith is confidence in what we hope for and assurance about what we do not see."
 }
+```
+
+#### Getting the verse of the day in a different language:
+
+You can specify a single or multiple languages by passing them as a string separated by a comma. The languages must be in the format of the ISO 639-1 code. For example, `en` for English, `es` for Spanish, `fr` for French, and `de` for German. It will return the first language that is available. If the language is not available it will move on to the next language in the list.
+
+Single language:
+
+```javascript
+const YouVersion = require("@glowstudent/youversion");
+
+(async () => {
+  console.log(await YouVersion.getVerseOfTheDay("sk"));
+})();
+```
+
+Multiple languages:
+
+```javascript
+const YouVersion = require("@glowstudent/youversion");
+
+(async () => {
+  console.log(await YouVersion.getVerseOfTheDay("es, fr, de"));
+})();
 ```
 
 #### Getting any verse:
