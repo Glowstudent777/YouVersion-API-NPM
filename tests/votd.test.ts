@@ -1,5 +1,5 @@
 import { expect, it, describe } from 'vitest';
-import { getVotd } from "../src/functions/votd";
+import { getVerseOfTheDay as getVotd } from "../src/index.ts";
 
 describe("VOTD", () => {
     it("Should Return VOTD", async () => {

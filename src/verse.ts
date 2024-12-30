@@ -1,6 +1,6 @@
 import axios from 'axios'
 import * as cheerio from 'cheerio';
-import { getVerse as getVerseFunc } from './functions/verse';
+import { getVerse as getVerseFunc } from './core/functions/verse';
 
 
 interface bookType {
