@@ -1,4 +1,4 @@
-import { getVerse } from "../src/functions/verse";
+import { getVerse } from "../src/index.ts";
 import { expect, it, describe } from 'vitest';
 
 describe("getVerse", () => {
