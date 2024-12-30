@@ -4,7 +4,7 @@ A simple module to get the Verse of the Day and any verse you would like.
 
 ## Installation
 
-> **Note**
+> [!NOTE]
 > I use `pnpm` in these examples. `NPM` will also work if you don't have or want to install `pnpm`
 
 First step is of course installing the module
@@ -129,7 +129,7 @@ Trying to access a book that does not exist will prompt a similar response but w
 
 ## Contributing
 
-> **Note**
+> [!NOTE]
 > Most of the logic is in the `YouVersion-Core` repository. If you would like to contribute to the core repository, please visit [here](https://github.com/Glowstudent777/YouVersion-Core).
 
 Before creating an issue, please ensure that it hasn't already been reported/suggested.
