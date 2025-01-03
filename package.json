@@ -40,7 +40,14 @@
     "type": "git",
     "url": "git+https://github.com/Glowstudent777/YouVersion-API-NPM.git"
   },
-  "keywords": [],
+  "keywords": [
+    "bible",
+    "youversion",
+    "verse",
+    "verse-of-the-day",
+    "votd",
+    "scripture"
+  ],
   "author": "Glowstudent",
   "license": "MIT",
   "bugs": {

@@ -1,4 +1,4 @@
-# YouVersion-API
+# YouVersion API
 
 A simple module to get the Verse of the Day and any verse you would like.
 
@@ -130,7 +130,7 @@ Trying to access a book that does not exist will prompt a similar response but w
 ## Contributing
 
 > [!NOTE]
-> Most of the logic is in the `YouVersion-Core` repository. If you would like to contribute to the core repository, please visit [here](https://github.com/Glowstudent777/YouVersion-Core).
+> Most of the logic is now in the `YouVersion-Core` repository. If you would like to contribute to the core repository, please visit [here](https://github.com/Glowstudent777/YouVersion-Core).
 
 Before creating an issue, please ensure that it hasn't already been reported/suggested.
 
