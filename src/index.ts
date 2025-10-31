@@ -1,2 +1,2 @@
-export { getVerseOfTheDay } from './verseOfTheDay'
-export { getVerse } from './verse'
+export { getVerseOfTheDay } from "./verseOfTheDay";
+export { getVerse } from "./verse";

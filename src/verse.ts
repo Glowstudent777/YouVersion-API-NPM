@@ -1,25 +1,34 @@
-import axios from 'axios'
-import * as cheerio from 'cheerio';
-import { getVerse as getVerseFunc } from './core/functions/verse';
-
+import axios from "axios";
+import * as cheerio from "cheerio";
+import { getVerse as getVerseFunc } from "./core";
 
 interface bookType {
-    book: String;
-    aliases: Array<String>;
-    chapters: Number;
+  book: String;
+  aliases: Array<String>;
+  chapters: Number;
 }
 
-export async function getVerse(book: string, chapter: string, verses: string, version: string = "NIV") {
-    function apiError(code: number, message: string) {
-        return {
-            "code": code,
-            "message": message
-        };
-    }
-    if (!book) return apiError(400, "Missing field 'book'");
+export async function getVerse(
+  book: string,
+  chapter: string,
+  verses: string,
+  version: string = "NIV"
+) {
+  function apiError(code: number, message: string) {
+    return {
+      code: code,
+      message: message,
+    };
+  }
+  if (!book) return apiError(400, "Missing field 'book'");
 
-    const data: any = await getVerseFunc(book, chapter.toString(), verses.toString(), version.toString());
+  const data: any = await getVerseFunc(
+    book,
+    chapter.toString(),
+    verses.toString(),
+    version.toString()
+  );
 
-    if (data?.code) return apiError(data.code, data.message);
-    else return data;
+  if (data?.code) return apiError(data.code, data.message);
+  else return data;
 }
