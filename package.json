@@ -28,7 +28,7 @@
   },
   "scripts": {
     "clean": "npx rimraf --glob dist/ ./*.tgz",
-    "copyfiles": "cp ./src/core/db/ ./dist/core/db/ -r",
+    "copyfiles": "node tools/copyfiles.js",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "babel": "npm run clean && npx babel src -d dist --extensions .ts --no-copy-ignored && npm run copyfiles",

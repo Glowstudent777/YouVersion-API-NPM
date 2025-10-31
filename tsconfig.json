@@ -9,7 +9,8 @@
     "module": "CommonJS",
     "outDir": "./dist",
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "resolveJsonModule": true
   },
   "include": [
     "src"
@@ -18,6 +19,7 @@
     "node_modules",
     "**/__tests__",
     "**/*.test.ts",
-    "**/vitest.config.*"
+    "**/vitest.config.*",
+    "**/util/**"
   ]
 }
