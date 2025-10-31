@@ -1,6 +1,6 @@
 {
   "name": "@glowstudent/youversion",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "A simple module to get the Verse of the Day and any verse you would like.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
